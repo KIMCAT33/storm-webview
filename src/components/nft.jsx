@@ -14,16 +14,18 @@ import axios from 'axios';
 const connection = new Connection("https://api.devnet.solana.com", "confirmed");
 
 // web
-/*
+
 let wallet =  Keypair.fromSecretKey(
     bs58.decode(process.env.REACT_APP_SECRET_KEY)
 )
-*/
+
 
 // mobile
+/*
 let wallet = Keypair.fromSecretKey(
     bs58.decode(window.tinji.getWalletSecretKey())
 );
+*/
 const metaplex = new Metaplex(connection).use(keypairIdentity(wallet));
 
 export default function NFT() {
@@ -50,7 +52,7 @@ export default function NFT() {
       
 
         const myNfts = await metaplex.nfts().findAllByOwner({
-            owner: "7yzhywujmUCzvF77htKJatEDX4nX7b7ueRKyqBwpkcgd",
+            owner: "12ozzwuTXeTX9jLDKkxFgceequ6FA8MhEm2TVTaNzc59",
         });
 
         myNfts.forEach(async (nft) => {
