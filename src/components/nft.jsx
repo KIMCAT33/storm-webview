@@ -12,9 +12,14 @@ import axios from 'axios';
 
 //Devnet
 const connection = new Connection("https://api.devnet.solana.com", "confirmed");
-let wallet =  Keypair.fromSecretKey(
+
+// web
+/*let wallet =  Keypair.fromSecretKey(
     bs58.decode(process.env.REACT_APP_SECRET_KEY)
-)
+)*/
+
+// mobile
+let wallet = window.tinji.getWallet()
 const metaplex = new Metaplex(connection).use(keypairIdentity(wallet));
 
 export default function NFT() {
