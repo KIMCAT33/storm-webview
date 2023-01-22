@@ -14,9 +14,11 @@ import axios from 'axios';
 const connection = new Connection("https://api.devnet.solana.com", "confirmed");
 
 // web
-/*let wallet =  Keypair.fromSecretKey(
+/*
+let wallet =  Keypair.fromSecretKey(
     bs58.decode(process.env.REACT_APP_SECRET_KEY)
-)*/
+)
+*/
 
 // mobile
 let wallet = window.tinji.getWallet()
@@ -115,7 +117,7 @@ export default function NFT() {
                         alt="Burn"
                         className='btn'
                         onClick={() => burnNFT({targetAddress: nft.mintAddress, collection: nft.collection}).then(
-                            (response) => console.log("burned")
+                            (response) => alert("NFT Burned")
                         )}
                     />
                     <div
