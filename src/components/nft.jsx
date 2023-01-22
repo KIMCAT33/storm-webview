@@ -109,7 +109,9 @@ export default function NFT() {
     return (
         
             NFTs.map((nft, index) => (
-                nft&&(<TinderCard
+                nft&&(
+                <>
+                <TinderCard
                 className="swipe"
                 key={nft.name}
                 preventSwipe={["up", "down"]}
@@ -121,7 +123,11 @@ export default function NFT() {
                     src={nft.image} 
                     alt={nft.name} 
                 />
-                <div
+     
+                </div>
+ 
+                </TinderCard>
+                               <div
                     className="card-menu" 
                     style={{zIndex: 1}}
                 >
@@ -146,8 +152,8 @@ export default function NFT() {
                     />
                 
                 </div>
-                </div>
-                </TinderCard>)
+                </>
+                )
             ))
     );
     
