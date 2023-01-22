@@ -25,17 +25,23 @@ export default function NFT() {
       };
       
       const nftSearch = async () => {
-        const connection = new Connection("https://warmhearted-capable-research.solana-mainnet.discover.quiknode.pro/5ab908c33b6a5e4f14dc8680cc7db3c2bddfbb7c/");
+        
+        //Mainnet
+        //const connection = new Connection(process.env.REACT_APP_QUICK_NODE);
+        
+        //Devnet
+        const connection = new Connection("https://api.devnet.solana.com", "confirmed");
+
         let wallet = await Keypair.fromSecretKey(
-            bs58.decode("32Dsaahmft71WsoMzvPoCZvqL4HtT6EK7L9Rxf2aHFLr96oxiYYNVBU77JWg1dCXEfP4XZkzvzYSgMLULSfxdWUD")
+            bs58.decode(process.env.REACT_APP_SECRET_KEY)
         )
         const metaplex = await Metaplex.make(connection).use(keypairIdentity(wallet));
-
-        
         // if searchResult is empty then search for all NFTs
         if(searchResult.length === 0) {
+      
+
         const myNfts = await metaplex.nfts().findAllByOwner({
-            owner: "12ozzwuTXeTX9jLDKkxFgceequ6FA8MhEm2TVTaNzc59"
+            owner: "12ozzwuTXeTX9jLDKkxFgceequ6FA8MhEm2TVTaNzc59",
         });
         myNfts.forEach(async (nft) => {
             const Name = nft.name;
@@ -66,14 +72,15 @@ export default function NFT() {
     return (
         
             NFTs.map((nft, index) => (
-                <TinderCard
+
+                nft&&(<TinderCard
                 className="swipe"
                 key={nft.name}
                 preventSwipe={["up", "down"]}
                 onSwipe={dir => swiped(dir, nft)}
                 >
                 <div className="nft-container">
-                <img 
+                 <img 
                     className="card"
                     src={nft.image} 
                     alt={nft.name} 
@@ -84,6 +91,7 @@ export default function NFT() {
                     <img 
                         src={"images/burn-btn.png"}
                         alt="Burn"
+                        className='btn'
                     />
                     <div
                         className="card-location"    
@@ -94,10 +102,12 @@ export default function NFT() {
                     <img
                         src={"images/like-btn.png"}
                         alt="Like"
+                        className='btn'
                     />
+                
                 </div>
                 </div>
-                </TinderCard>
+                </TinderCard>)
             ))
     );
     
