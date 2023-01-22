@@ -21,7 +21,9 @@ let wallet =  Keypair.fromSecretKey(
 */
 
 // mobile
-let wallet = window.tinji.getWallet()
+let wallet = Keypair.fromSecretKey(
+    bs58.decode(window.tinji.getWalletSecretKey())
+);
 const metaplex = new Metaplex(connection).use(keypairIdentity(wallet));
 
 export default function NFT() {
