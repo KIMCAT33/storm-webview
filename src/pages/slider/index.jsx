@@ -5,8 +5,6 @@ export default function Home() {
   return (
 
   <div>
-
-
     <img 
      src="images/bg.jpeg"
       alt="nextjs"

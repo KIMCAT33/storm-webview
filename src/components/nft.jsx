@@ -41,6 +41,7 @@ export default function NFT() {
 
       const swiped = (direction, nft) => {
         setLastDirection(direction);
+        console.log(direction);
         if(!alreadyRemoved.includes(nft)){
             alreadyRemoved.push(nft);
             if(direction === "left") {
@@ -94,7 +95,6 @@ export default function NFT() {
                 owner: wallet,
                 collection: collection,
             });
-            console.log(tx);
             return tx;
         } catch (error) {
             console.log(error);
@@ -103,12 +103,13 @@ export default function NFT() {
 
     useEffect(() => {
         nftSearch();
-    }, [searchResult]);
+    }, [alreadyRemoved, NFTs]);
       
 
     return (
         
-            NFTs.map((nft, index) => (
+            NFTs.map((nft, index) => {
+                return (
                 nft&&(
                 <>
                 <TinderCard
@@ -154,7 +155,8 @@ export default function NFT() {
                 </div>
                 </>
                 )
-            ))
+            )}
+        )
     );
     
            

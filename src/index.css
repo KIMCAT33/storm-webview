@@ -18,17 +18,12 @@ code {
 
 
 .card {
-  display: flex;
-  flex-direction: column;
-  gap: 336px;
+  background: #ddd;
+  filter: drop-shadow(0 4px 30px rgba(0,0,0,.25));
   isolation: isolate;
-  position: relative;
-  width: 320px;
-  height: 570px;
-  top: 16px;
-  left: 20px;
-
-  filter: drop-shadow(0px 4px 30px rgba(0, 0, 0, 0.25));
+  position: absolute;
+  max-width: 179%;
+  left: -116px;
   border-radius: 48px;
 }
 
@@ -76,13 +71,13 @@ code {
 
 .nft-container {
   position: relative;
+  margin: 22px auto;
+      width: 320px;
+      height: 570px;
+      overflow: hidden;
+      border-radius: 48px;
 }
 
 .btn {
   cursor: pointer;
-}
-
-.layer {
-  position: relative;
-  z-index: 0;
 }
