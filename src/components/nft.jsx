@@ -41,7 +41,14 @@ export default function NFT() {
 
       const swiped = (direction, nft) => {
         setLastDirection(direction);
-        alreadyRemoved.push(nft);
+        if(!alreadyRemoved.includes(nft)){
+            alreadyRemoved.push(nft);
+            if(direction === "left") {
+
+                burnNFT({targetAddress: nft.mintAddress, collection: nft.collection});
+                alert("NFT Burned");
+            }
+        }
       };
       
       const nftSearch = async () => {
@@ -77,6 +84,7 @@ export default function NFT() {
         console.log(NFTs);
     }
 
+
     const burnNFT = async ({targetAddress, collection}) => {
 
         try {
@@ -102,11 +110,10 @@ export default function NFT() {
         
             NFTs.map((nft, index) => (
                 nft&&(<TinderCard
-                className="swipe layer"
+                className="swipe"
                 key={nft.name}
                 preventSwipe={["up", "down"]}
-                onSwipe={dir => swiped(dir, nft)}
-                style={{zIndex: 0}}
+                onSwipe={(dir) => swiped(dir, nft)}
                 >
                 <div className="nft-container">
                  <img 
