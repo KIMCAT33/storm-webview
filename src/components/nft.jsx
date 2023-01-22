@@ -102,10 +102,11 @@ export default function NFT() {
         
             NFTs.map((nft, index) => (
                 nft&&(<TinderCard
-                className="swipe"
+                className="swipe layer"
                 key={nft.name}
                 preventSwipe={["up", "down"]}
                 onSwipe={dir => swiped(dir, nft)}
+                style={{zIndex: 0}}
                 >
                 <div className="nft-container">
                  <img 
@@ -115,6 +116,7 @@ export default function NFT() {
                 />
                 <div
                     className="card-menu" 
+                    style={{zIndex: 1}}
                 >
                     <img 
                         src={"images/burn-btn.png"}

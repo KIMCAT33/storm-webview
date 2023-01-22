@@ -81,3 +81,8 @@ code {
 .btn {
   cursor: pointer;
 }
+
+.layer {
+  position: relative;
+  z-index: 0;
+}
