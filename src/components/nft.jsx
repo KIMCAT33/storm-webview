@@ -1,5 +1,5 @@
 import TinderCard from "react-tinder-card";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 //import apiPost from '../utils/apiPosts';
 import {
   Metaplex,
@@ -34,7 +34,7 @@ export default function NFT() {
   const [searchResult, setSearchResult] = useState([]);
   const [Nft, setNFT] = useState({});
   const nextId = useRef(0);
-
+  const db = [];
   const alreadyRemoved = [];
 
   const [lastDirection, setLastDirection] = useState();
@@ -70,9 +70,21 @@ export default function NFT() {
         mintAddress: mintAddress,
         collection: collection,
       };
+
+    const db = [];
+    db.push(nftInfo);
+    setSearchResult([...searchResult, ...db])
     setNFT(nftInfo);
     console.log("nftInfo", nftInfo);
     }
+
+    const childRefs = useMemo(
+        () =>
+          Array(db.length)
+            .fill(0)
+            .map(i => React.createRef()),
+        []
+      );
 
 
   const outOfFrame = () => {
@@ -98,16 +110,18 @@ export default function NFT() {
 
   return (
     <>
-    <div>
+    { searchResult.map((nft,index) => {
+    return ( <div>
       <TinderCard
         className="swipe"
         key={Nft.id}
+        ref={childRefs[index]}
         preventSwipe={["up", "down"]}
-        onSwipe={(dir) => swiped(dir, Nft)}
+        onSwipe={(dir) => swiped(dir, nft)}
         onCardLeftScreen={() => outOfFrame()}
       >
         <div className="nft-container">
-          <img className="card" src={Nft.image} alt={Nft.name} />
+          <img className="card" src={nft.image} alt={nft.name} />
         </div>
       </TinderCard>
       <div className="card-menu" style={{ zIndex: 1 }}>
@@ -116,7 +130,7 @@ export default function NFT() {
           alt="Burn"
           className="btn"
           onClick={() =>
-            swiped("left", Nft)
+            swiped("left", nft)
           }
         />
         <div className="card-location">
@@ -125,11 +139,11 @@ export default function NFT() {
         </div>
         <img src={"images/like-btn.png"} alt="Like" className="btn" 
             onClick={() =>
-                swiped("right", Nft)
+                swiped("right", nft)
             }
         />
       </div>
-      </div>
+      </div>)})}
     </>
   );
 

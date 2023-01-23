@@ -21,7 +21,7 @@ code {
   background: #ddd;
   filter: drop-shadow(0 4px 30px rgba(0,0,0,.25));
   isolation: isolate;
-  position: absolute;
+  position: relative;
   max-width: 179%;
   left: -116px;
   border-radius: 48px;
@@ -70,7 +70,8 @@ code {
 }
 
 .nft-container {
-  position: relative;
+  position: absolute;
+  left: 25px;
   margin: 22px auto;
       width: 320px;
       height: 570px;
